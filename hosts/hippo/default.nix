@@ -10,7 +10,7 @@ delib.host {
 
     hardware = {
       graphics.intel.enable = true;
-      security.enable = true;
+      tpm.enable = true;
 
       networking = {
         useDHCP = false;

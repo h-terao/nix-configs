@@ -30,6 +30,18 @@ delib.module {
   };
 
   home.ifEnabled = {
+    # GTK font settings. These live here rather than in base.fonts because
+    # base.fonts applies to every host, and writing them pulls in a dconf key
+    # that headless hosts cannot load. Factor them out into a shared module if
+    # desktops.cosmic ever gets used.
+    gtk = {
+      enable = true;
+      font = {
+        name = "Noto Sans CJK JP";
+        size = 11;
+      };
+    };
+
     home.packages = with pkgs; [
       # Extensions
       gnomeExtensions.kimpanel

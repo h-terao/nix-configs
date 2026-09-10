@@ -88,7 +88,9 @@
             if extra == [ ] then
               drv
             else
-              drv.overrideAttrs (old: { buildInputs = (old.buildInputs or [ ]) ++ extra; });
+              drv.overrideAttrs (old: {
+                buildInputs = (old.buildInputs or [ ]) ++ extra;
+              });
 
           # playwright resolves a browser to "<name with - replaced by _>-<revision>"
           # under PLAYWRIGHT_BROWSERS_PATH.
