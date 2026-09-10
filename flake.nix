@@ -35,8 +35,15 @@
     };
   };
   outputs =
-    { denix, ... }@inputs:
+    { nixpkgs, denix, ... }@inputs:
     let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
       mkConfigurations =
         moduleSystem:
         denix.lib.configurations {
@@ -65,5 +72,9 @@
       nixosConfigurations = mkConfigurations "nixos";
       homeConfigurations = mkConfigurations "home";
       darwinConfigurations = mkConfigurations "darwin";
+
+      # `nix fmt` formats the whole tree. nixfmt-tree is the treefmt wrapper
+      # around nixfmt; calling nixfmt on directories directly is deprecated.
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }
