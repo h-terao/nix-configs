@@ -5,7 +5,7 @@
   ...
 }:
 delib.module {
-  name = "core.bluetooth";
+  name = "hardware.bluetooth";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {

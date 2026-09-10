@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "core.fonts";
+  name = "base.fonts";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {

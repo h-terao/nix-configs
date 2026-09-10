@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "core.audio";
+  name = "hardware.audio";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {

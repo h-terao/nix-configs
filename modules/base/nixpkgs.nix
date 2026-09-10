@@ -10,7 +10,7 @@ let
   ];
 in
 delib.module {
-  name = "core.nixpkgs";
+  name = "base.nixpkgs";
 
   nixos.always = {
     nixpkgs = {

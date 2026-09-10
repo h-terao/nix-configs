@@ -5,11 +5,11 @@
   ...
 }:
 delib.module {
-  name = "core.graphics.intel-arc";
+  name = "hardware.graphics.intel";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {
-    # Enable bluetooth
+    # Enable Intel graphics
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [

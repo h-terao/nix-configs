@@ -5,7 +5,7 @@
   ...
 }:
 delib.module {
-  name = "core.networking";
+  name = "hardware.networking";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled =
