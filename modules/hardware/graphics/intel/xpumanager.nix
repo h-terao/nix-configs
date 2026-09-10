@@ -5,10 +5,11 @@
 }:
 let
   # Not in nixpkgs, so built from packages/xpumanager.
-  package = pkgs.callPackage ../../packages/xpumanager { };
+  package = pkgs.callPackage ../../../../packages/xpumanager { };
 in
 delib.module {
-  name = "programs.xpumanager";
+  name = "hardware.graphics.intel.xpumanager";
+  # Enabled by default through hardware.graphics.intel.
   options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
