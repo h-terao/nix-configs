@@ -5,7 +5,7 @@
   ...
 }:
 delib.module {
-  name = "hardware.security";
+  name = "hardware.tpm";
   options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
