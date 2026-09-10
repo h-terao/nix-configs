@@ -6,7 +6,7 @@
 }:
 delib.module {
   name = "hardware.security";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     security.polkit.enable = true;

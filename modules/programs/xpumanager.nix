@@ -9,7 +9,7 @@ let
 in
 delib.module {
   name = "programs.xpumanager";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     # xpu-smi talks to the GPU through Level Zero sysman, so it needs the
