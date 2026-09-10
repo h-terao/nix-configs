@@ -15,6 +15,7 @@ delib.module {
       brave.enable = lib.mkDefault true;
       google-chrome.enable = lib.mkDefault true;
 
+      vscode.enable = lib.mkDefault true;
       obsidian.enable = lib.mkDefault true;
       slack.enable = lib.mkDefault true;
     };
