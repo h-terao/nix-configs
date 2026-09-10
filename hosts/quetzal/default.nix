@@ -9,7 +9,6 @@ delib.host {
     };
 
     programs = {
-      vscode.enable = false;
       codex.enable = false;
       docker.enable = false;
     };

@@ -7,15 +7,18 @@
 }:
 delib.module {
   name = "hardware.networking";
-  options = delib.moduleOptions (with delib; {
-    enable = boolOption false;
-    useDHCP = boolOption true;
-    interface = allowNull (strOption null);
-    ipv4.address = allowNull (strOption null);
-    ipv4.prefixLength = intOption 24;
-    defaultGateway = allowNull (strOption null);
-    nameservers = listOfOption str [ ];
-  });
+  options = delib.moduleOptions (
+    with delib;
+    {
+      enable = boolOption false;
+      useDHCP = boolOption true;
+      interface = allowNull (strOption null);
+      ipv4.address = allowNull (strOption null);
+      ipv4.prefixLength = intOption 24;
+      defaultGateway = allowNull (strOption null);
+      nameservers = listOfOption str [ ];
+    }
+  );
 
   nixos.ifEnabled =
     { cfg, ... }:
@@ -51,34 +54,33 @@ delib.module {
       # Enable the OpenSSH daemon.
       services.openssh.enable = true;
 
-      networking =
-        {
-          hostName = host.name;
-          useDHCP = cfg.useDHCP;
-          nameservers = cfg.nameservers;
+      networking = {
+        hostName = host.name;
+        useDHCP = cfg.useDHCP;
+        nameservers = cfg.nameservers;
 
-          networkmanager = {
-            enable = true;
-            plugins = with pkgs; [
-              networkmanager-openvpn
-              networkmanager-openconnect
-              networkmanager-l2tp
-              networkmanager-strongswan
-              networkmanager-sstp
-              networkmanager-vpnc
-            ];
-          };
-        }
-        // lib.optionalAttrs (cfg.interface != null) {
-          interfaces.${cfg.interface}.ipv4.addresses = [
-            {
-              address = cfg.ipv4.address;
-              prefixLength = cfg.ipv4.prefixLength;
-            }
+        networkmanager = {
+          enable = true;
+          plugins = with pkgs; [
+            networkmanager-openvpn
+            networkmanager-openconnect
+            networkmanager-l2tp
+            networkmanager-strongswan
+            networkmanager-sstp
+            networkmanager-vpnc
           ];
-        }
-        // lib.optionalAttrs (cfg.defaultGateway != null) {
-          defaultGateway = cfg.defaultGateway;
         };
+      }
+      // lib.optionalAttrs (cfg.interface != null) {
+        interfaces.${cfg.interface}.ipv4.addresses = [
+          {
+            address = cfg.ipv4.address;
+            prefixLength = cfg.ipv4.prefixLength;
+          }
+        ];
+      }
+      // lib.optionalAttrs (cfg.defaultGateway != null) {
+        defaultGateway = cfg.defaultGateway;
+      };
     };
 }

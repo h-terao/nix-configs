@@ -8,7 +8,6 @@ delib.module {
   options = delib.singleEnableOption false;
 
   myconfig.ifEnabled.programs = {
-    vscode.enable = lib.mkDefault true;
     playwright-cli.enable = lib.mkDefault true;
 
     mise.enable = lib.mkDefault true;

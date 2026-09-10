@@ -40,15 +40,4 @@ delib.module {
       };
     };
   };
-
-  home.ifEnabled = {
-    # GTK font settings
-    gtk = {
-      enable = true;
-      font = {
-        name = "Noto Sans CJK JP";
-        size = 11;
-      };
-    };
-  };
 }
