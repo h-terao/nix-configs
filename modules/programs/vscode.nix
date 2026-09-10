@@ -6,7 +6,7 @@
 }:
 delib.module {
   name = "programs.vscode";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.always = {
     nixpkgs.overlays = [

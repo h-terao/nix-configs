@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.slack";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [
