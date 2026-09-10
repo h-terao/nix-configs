@@ -4,8 +4,8 @@
   ...
 }:
 delib.module {
-  name = "core.printing";
-  options = delib.singleEnableOption true;
+  name = "programs.cups";
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     # Enable CUPS to print documents.

@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.bat";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     environment.systemPackages = with pkgs; [ bat ];

@@ -9,11 +9,11 @@ let
 in
 delib.module {
   name = "programs.xpumanager";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     # xpu-smi talks to the GPU through Level Zero sysman, so it needs the
-    # graphics stack that core.graphics.intel-arc sets up.
+    # graphics stack that hardware.graphics.intel sets up.
     environment.systemPackages = [ package ];
   };
 }

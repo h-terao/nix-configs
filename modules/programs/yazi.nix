@@ -4,7 +4,7 @@
 }:
 delib.module {
   name = "programs.yazi";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.yazi = {

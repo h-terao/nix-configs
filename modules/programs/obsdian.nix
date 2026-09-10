@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.obsidian";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     # Avoid `programs.obsidian` to open last used vault on startup

@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "core.locale";
+  name = "base.locale";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {

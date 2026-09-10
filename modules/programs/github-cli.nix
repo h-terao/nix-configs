@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.github-cli";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.gh = {

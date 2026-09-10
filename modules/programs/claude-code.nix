@@ -6,7 +6,7 @@
 }:
 delib.module {
   name = "programs.claude-code";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.claude-code = {

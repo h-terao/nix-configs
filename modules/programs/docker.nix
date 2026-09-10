@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.docker";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     virtualisation.docker.enable = true;

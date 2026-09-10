@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "core.nix";
+  name = "base.nix";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {
