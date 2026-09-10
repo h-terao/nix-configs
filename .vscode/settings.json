@@ -1,0 +1,17 @@
+{
+  "nix.formatterPath": "nixfmt",
+
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
+}
