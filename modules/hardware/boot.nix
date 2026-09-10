@@ -4,8 +4,8 @@
   ...
 }:
 delib.module {
-  name = "core.boot";
-  options = delib.singleEnableOption true;
+  name = "hardware.boot";
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     # Bootloader.

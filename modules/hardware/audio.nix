@@ -4,8 +4,8 @@
   ...
 }:
 delib.module {
-  name = "core.audio";
-  options = delib.singleEnableOption true;
+  name = "hardware.audio";
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     # Enable sound with pipewire.

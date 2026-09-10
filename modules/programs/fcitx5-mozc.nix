@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.fcitx5-mozc";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     i18n.inputMethod = {
