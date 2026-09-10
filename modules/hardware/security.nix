@@ -5,7 +5,7 @@
   ...
 }:
 delib.module {
-  name = "core.security";
+  name = "hardware.security";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {

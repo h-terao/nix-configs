@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "core.printing";
+  name = "programs.cups";
   options = delib.singleEnableOption true;
 
   nixos.ifEnabled = {
