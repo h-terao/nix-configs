@@ -1,0 +1,35 @@
+name: update flake.lock
+
+on:
+  schedule:
+    # GitHub Actions schedules use UTC. 17:00 UTC is 02:00 JST the next day.
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Update flake.lock
+        run: nix flake update
+
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: flake.lock
+          branch: automation/update-flake-lock
+          commit-message: Update flake.lock
+          delete-branch: true
+          title: Update flake.lock
+          body: |
+            Automated daily update of the flake inputs.
