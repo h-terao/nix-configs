@@ -16,7 +16,6 @@ delib.host {
     # No GUI under WSL (these modules default to enabled).
     desktops.gnome = {
       enable = false;
-      ereshkigal-cursors.enable = false;
     };
   };
 
