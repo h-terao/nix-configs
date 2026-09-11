@@ -1,0 +1,35 @@
+name: restrict pull request authors
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  enforce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close pull requests from users without write access
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          permission="$({
+            gh api "repos/$REPOSITORY/collaborators/$AUTHOR/permission" \
+              --jq '.user.permissions'
+          } 2>/dev/null || true)"
+
+          if jq -e '.admin or .maintain or .push' <<<"$permission" >/dev/null; then
+            echo "$AUTHOR has write access or higher."
+            exit 0
+          fi
+
+          gh pr comment "$PR_NUMBER" \
+            --repo "$REPOSITORY" \
+            --body "This repository only accepts pull requests from users with write access or higher."
+          gh pr close "$PR_NUMBER" --repo "$REPOSITORY"
