@@ -1,26 +1,35 @@
 {
   delib,
-  pkgs,
-  host,
+  lib,
   ...
 }:
 delib.module {
   name = "hardware.tpm";
-  options = delib.singleEnableOption false;
+  options = delib.moduleOptions (
+    with delib;
+    {
+      enable = boolOption false;
+      luksDeviceName = allowNull (strOption null);
+    }
+  );
 
-  nixos.ifEnabled = {
-    security.polkit.enable = true;
+  nixos.ifEnabled =
+    { cfg, ... }:
+    {
+      security.polkit.enable = true;
 
-    # TPM2 configurations
-    security.tpm2.enable = true;
-    security.tpm2.pkcs11.enable = true;
-    security.tpm2.tctiEnvironment.enable = true;
+      # TPM2 configurations
+      security.tpm2.enable = true;
+      security.tpm2.pkcs11.enable = true;
+      security.tpm2.tctiEnvironment.enable = true;
 
-    # Enable TPM2 for initrd
-    boot.initrd.systemd.enable = true;
-    boot.initrd.systemd.tpm2.enable = true;
-    # boot.initrd.luks.devices."luks-0b69bffa-7e53-4f67-99bc-1ec35c12e4c1".crypttabExtraOpts = [
-    #  "tpm2-device=auto"
-    #];
-  };
+      # Enable TPM2 for initrd
+      boot.initrd.systemd.enable = true;
+      boot.initrd.systemd.tpm2.enable = true;
+      boot.initrd.luks.devices = lib.optionalAttrs (cfg.luksDeviceName != null) {
+        ${cfg.luksDeviceName}.crypttabExtraOpts = [
+          "tpm2-device=auto"
+        ];
+      };
+    };
 }

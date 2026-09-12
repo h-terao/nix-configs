@@ -10,7 +10,10 @@ delib.host {
 
     hardware = {
       graphics.intel.enable = true;
-      tpm.enable = true;
+      tpm = {
+        enable = true;
+        luksDeviceName = "luks-e928bd5d-c0e5-4138-bb18-1e8d70b143c2";
+      };
 
       networking = {
         useDHCP = false;
