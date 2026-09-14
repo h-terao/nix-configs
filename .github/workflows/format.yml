@@ -26,3 +26,10 @@ jobs:
             echo "::error::nix fmt changed files. Run 'nix fmt' locally and commit the result."
             exit 1
           fi
+
+      - name: Evaluate all NixOS configurations
+        run: |
+          nix eval --json --no-update-lock-file \
+            --option allow-import-from-derivation false \
+            .#nixosConfigurations \
+            --apply 'configs: builtins.mapAttrs (_: host: host.config.system.build.toplevel.drvPath) configs'
