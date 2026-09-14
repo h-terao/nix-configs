@@ -25,7 +25,9 @@ jobs:
         run: nix flake update
 
       - uses: peter-evans/create-pull-request@v8
+        id: pull-request
         with:
+          token: ${{ secrets.PAT }}
           add-paths: flake.lock
           branch: automation/update-flake-lock
           commit-message: Update flake.lock
@@ -33,3 +35,11 @@ jobs:
           title: Update flake.lock
           body: |
             Automated daily update of the flake inputs.
+
+      - name: Enable auto-merge
+        if: steps.pull-request.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.pull-request.outputs.pull-request-number }}
+        run: gh pr merge "$PR_NUMBER" --auto --merge
