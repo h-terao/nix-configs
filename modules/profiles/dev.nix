@@ -22,5 +22,6 @@ delib.module {
     herdr.enable = lib.mkDefault true;
     dotenvx.enable = lib.mkDefault true;
     openssl.enable = lib.mkDefault true;
+    direnv.enable = lib.mkDefault true;
   };
 }
