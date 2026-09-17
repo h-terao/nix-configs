@@ -9,7 +9,6 @@ delib.host {
     };
 
     programs = {
-      codex.enable = false;
       docker.enable = false;
     };
 
