@@ -31,7 +31,6 @@
     };
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
