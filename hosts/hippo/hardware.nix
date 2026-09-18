@@ -36,15 +36,15 @@ delib.host {
     boot.extraModulePackages = [ ];
 
     fileSystems."/" = {
-      device = "/dev/mapper/luks-e928bd5d-c0e5-4138-bb18-1e8d70b143c2";
+      device = "/dev/mapper/luks-71af17f5-434c-4b37-9dd4-3afcfe180655";
       fsType = "ext4";
     };
 
-    boot.initrd.luks.devices."luks-e928bd5d-c0e5-4138-bb18-1e8d70b143c2".device =
-      "/dev/disk/by-uuid/e928bd5d-c0e5-4138-bb18-1e8d70b143c2";
+    boot.initrd.luks.devices."luks-71af17f5-434c-4b37-9dd4-3afcfe180655".device =
+      "/dev/disk/by-uuid/71af17f5-434c-4b37-9dd4-3afcfe180655";
 
     fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/835C-7E10";
+      device = "/dev/disk/by-uuid/E63C-5871";
       fsType = "vfat";
       options = [
         "fmask=0077"
