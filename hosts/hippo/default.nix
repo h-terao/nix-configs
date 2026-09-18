@@ -12,7 +12,7 @@ delib.host {
       graphics.intel.enable = true;
       tpm = {
         enable = true;
-        luksDeviceName = "luks-e928bd5d-c0e5-4138-bb18-1e8d70b143c2";
+        luksDeviceName = "luks-71af17f5-434c-4b37-9dd4-3afcfe180655";
       };
 
       networking = {
