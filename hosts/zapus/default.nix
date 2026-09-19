@@ -9,6 +9,7 @@ delib.host {
     };
 
     programs = {
+      claude-code.enable = false;
       docker.enable = false;
       playwright-cli.enable = false;
     };
