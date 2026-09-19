@@ -1,0 +1,18 @@
+Remove stale context from the final AVF balloon hunk. Linux 6.1.188 has
+additional indirect-descriptor handling before VIRTIO_F_ACCESS_PLATFORM;
+the AVF change must still remove the latter without touching the former.
+
+--- a/arm64-balloon.patch
++++ b/arm64-balloon.patch
+@@ -538,10 +538,7 @@
+ index 4c85349024c1..72fe24005bc0 100644
+ --- a/drivers/virtio/virtio_balloon.c
+ +++ b/drivers/virtio/virtio_balloon.c
+-@@ -1097,7 +1097,6 @@ static int virtballoon_validate(struct virtio_device *vdev)
+- 	else if (!virtio_has_feature(vdev, VIRTIO_BALLOON_F_PAGE_POISON))
+- 		__virtio_clear_bit(vdev, VIRTIO_BALLOON_F_REPORTING);
+-
++@@ -1104,4 +1104,3 @@ static int virtballoon_validate(struct virtio_device *vdev)
+ -	__virtio_clear_bit(vdev, VIRTIO_F_ACCESS_PLATFORM);
+  	return 0;
+  }
