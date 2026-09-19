@@ -22,12 +22,18 @@ concurrency:
 jobs:
   build:
     name: Build ${{ matrix.host }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     strategy:
       max-parallel: 1
       fail-fast: false
       matrix:
-        host: [hippo, quetzal]
+        include:
+          - host: hippo
+            runner: ubuntu-latest
+          - host: quetzal
+            runner: ubuntu-latest
+          - host: zapus
+            runner: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v7
         with:
