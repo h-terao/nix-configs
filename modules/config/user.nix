@@ -14,7 +14,6 @@ delib.module {
 
         users.${user.name} = {
           isNormalUser = true;
-          initialPassword = user.name;
           extraGroups = [
             "networkmanager"
             "wheel"
