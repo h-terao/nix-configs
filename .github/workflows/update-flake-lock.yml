@@ -13,6 +13,9 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      pr-number: ${{ steps.pull-request.outputs.pull-request-number }}
+      head-sha: ${{ steps.pull-request.outputs.pull-request-head-sha }}
     steps:
       - uses: actions/checkout@v7
 
@@ -36,10 +39,25 @@ jobs:
           body: |
             Automated daily update of the flake inputs.
 
+  build-cache:
+    needs: update
+    if: needs.update.outputs.pr-number != ''
+    permissions:
+      contents: read
+    uses: ./.github/workflows/build-cache.yml
+    with:
+      ref: ${{ needs.update.outputs.head-sha }}
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+  auto-merge:
+    needs: [update, build-cache]
+    runs-on: ubuntu-latest
+    steps:
       - name: Enable auto-merge
-        if: steps.pull-request.outputs.pull-request-number != ''
         env:
           GH_TOKEN: ${{ secrets.PAT }}
           GH_REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ steps.pull-request.outputs.pull-request-number }}
-        run: gh pr merge "$PR_NUMBER" --auto --merge
+          PR_NUMBER: ${{ needs.update.outputs.pr-number }}
+          HEAD_SHA: ${{ needs.update.outputs.head-sha }}
+        run: gh pr merge "$PR_NUMBER" --auto --merge --match-head-commit "$HEAD_SHA"
