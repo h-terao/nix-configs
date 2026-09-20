@@ -39,19 +39,9 @@ jobs:
           body: |
             Automated daily update of the flake inputs.
 
-  build-cache:
+  auto-merge:
     needs: update
     if: needs.update.outputs.pr-number != ''
-    permissions:
-      contents: read
-    uses: ./.github/workflows/build-cache.yml
-    with:
-      ref: ${{ needs.update.outputs.head-sha }}
-    secrets:
-      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-  auto-merge:
-    needs: [update, build-cache]
     runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge
