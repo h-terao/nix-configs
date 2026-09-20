@@ -21,6 +21,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ false }} # Builds are disabled.
     name: Build ${{ matrix.host }}
     runs-on: ${{ matrix.runner }}
     strategy:
