@@ -14,10 +14,12 @@ delib.module {
         substituters = [
           "https://nix-community.cachix.org"
           "https://h-terao.cachix.org"
+          "https://cache.numtide.com"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "h-terao.cachix.org-1:3mC8vZI9jGSrC+QGZQk998D7KG+NYfo2ODCdnGXtNfs="
+          "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
         ];
         experimental-features = [
           "nix-command"
