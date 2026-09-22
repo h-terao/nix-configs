@@ -1,6 +1,8 @@
 name: Build and cache NixOS
 
 on:
+  push:
+    branches: [main]
   workflow_call:
     inputs:
       ref:
@@ -21,7 +23,6 @@ concurrency:
 
 jobs:
   build:
-    if: ${{ false }} # Builds are disabled.
     name: Build ${{ matrix.host }}
     runs-on: ${{ matrix.runner }}
     strategy:
@@ -40,12 +41,12 @@ jobs:
         with:
           ref: ${{ inputs.ref || github.sha }}
 
-      - name: Check Cachix credentials
+      - name: Check Yukimuro credentials
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
         run: |
           if [ -z "$CACHIX_AUTH_TOKEN" ]; then
-            echo "::error::Set the CACHIX_AUTH_TOKEN repository secret to a token with write access to h-terao."
+            echo "::error::Set the CACHIX_AUTH_TOKEN repository secret to a Yukimuro token with write access to h-terao."
             exit 1
           fi
 
@@ -53,16 +54,19 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-
-      - uses: cachix/cachix-action@v17
-        with:
-          name: h-terao
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: nix-community
+            extra-substituters = https://yukimuro.dev/cache/h-terao https://nix-community.cachix.org
+            extra-trusted-public-keys = yukimuro-h-terao-1:fpHnGMInbfIw+GhjKGHPVtsUDTtS+Krt4Hg6fgwi+5c= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
 
       - name: Build NixOS configuration
         env:
           NIXOS_HOST: ${{ matrix.host }}
         run: |
-          nix build --no-link --print-build-logs --no-update-lock-file \
+          nix build --out-link result --print-build-logs --no-update-lock-file \
             ".#nixosConfigurations.${NIXOS_HOST}.config.system.build.toplevel"
+
+      - name: Push NixOS closure to Yukimuro
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          nix run --inputs-from . --no-update-lock-file nixpkgs#cachix -- \
+            --host https://yukimuro.dev push h-terao ./result
