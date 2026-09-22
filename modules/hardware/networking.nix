@@ -66,8 +66,6 @@ delib.module {
             networkmanager-openconnect
             networkmanager-l2tp
             networkmanager-strongswan
-            networkmanager-sstp
-            networkmanager-vpnc
           ];
         };
       }
