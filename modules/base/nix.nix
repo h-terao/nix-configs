@@ -13,12 +13,12 @@ delib.module {
         auto-optimise-store = true;
         substituters = [
           "https://nix-community.cachix.org"
-          "https://h-terao.cachix.org"
+          "https://yukimuro.dev/cache/h-terao"
           "https://cache.numtide.com"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "h-terao.cachix.org-1:3mC8vZI9jGSrC+QGZQk998D7KG+NYfo2ODCdnGXtNfs="
+          "yukimuro-h-terao-1:fpHnGMInbfIw+GhjKGHPVtsUDTtS+Krt4Hg6fgwi+5c="
           "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
         ];
         experimental-features = [
