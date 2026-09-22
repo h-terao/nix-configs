@@ -16,6 +16,7 @@ jobs:
     outputs:
       pr-number: ${{ steps.pull-request.outputs.pull-request-number }}
       head-sha: ${{ steps.pull-request.outputs.pull-request-head-sha }}
+      pr-operation: ${{ steps.pull-request.outputs.pull-request-operation }}
     steps:
       - uses: actions/checkout@v7
 
@@ -38,6 +39,18 @@ jobs:
           title: Update flake.lock
           body: |
             Automated daily update of the flake inputs.
+
+  build:
+    needs: update
+    if: >-
+      needs.update.outputs.pr-number != '' &&
+      (needs.update.outputs.pr-operation == 'created' ||
+       needs.update.outputs.pr-operation == 'updated')
+    uses: ./.github/workflows/build-cache.yml
+    with:
+      ref: ${{ needs.update.outputs.head-sha }}
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   auto-merge:
     needs: update
