@@ -52,8 +52,8 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-            extra-substituters = https://yukimuro.dev/cache/h-terao https://nix-community.cachix.org
-            extra-trusted-public-keys = yukimuro-h-terao-1:fpHnGMInbfIw+GhjKGHPVtsUDTtS+Krt4Hg6fgwi+5c= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+            extra-substituters = https://yukimuro.dev/cache/h-terao https://nix-community.cachix.org https://cache.numtide.com
+            extra-trusted-public-keys = yukimuro-h-terao-1:fpHnGMInbfIw+GhjKGHPVtsUDTtS+Krt4Hg6fgwi+5c= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=
 
       - name: Build NixOS configuration
         env:
