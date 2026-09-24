@@ -32,6 +32,8 @@ jobs:
             runner: ubuntu-latest
           - host: quetzal
             runner: ubuntu-latest
+          - host: tilcayo
+            runner: ubuntu-latest
           - host: zapus
             runner: ubuntu-24.04-arm
     steps:
