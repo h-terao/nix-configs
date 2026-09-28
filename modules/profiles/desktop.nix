@@ -18,6 +18,7 @@ delib.module {
       vscode.enable = lib.mkDefault true;
       obsidian.enable = lib.mkDefault true;
       slack.enable = lib.mkDefault true;
+      chatgpt.enable = lib.mkDefault true;
     };
 
     hardware = {
