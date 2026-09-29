@@ -59,6 +59,8 @@ delib.module {
             # AI
             github.copilot
             anthropic.claude-code
+            vitest.explorer
+            oven.bun-vscode
             # Python
             ms-python.python
             # Deno
@@ -69,6 +71,9 @@ delib.module {
             jnoortheen.nix-ide
           ])
           ++ (with pkgs.vscode-extensions; [
+            # The marketplace snapshot has Oxc 0.0.2, which is incompatible
+            # with the Nixpkgs patch that configures oxlint and oxfmt paths.
+            oxc.oxc-vscode
             ms-python.vscode-pylance
           ]);
         keybindings = [
