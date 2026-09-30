@@ -11,6 +11,7 @@ delib.module {
     playwright-cli.enable = lib.mkDefault true;
 
     make.enable = lib.mkDefault true;
+    python.enable = lib.mkDefault true;
 
     claude-code.enable = lib.mkDefault true;
     codex.enable = lib.mkDefault true;
