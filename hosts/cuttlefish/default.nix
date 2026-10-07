@@ -8,10 +8,6 @@ delib.host {
       dev.enable = true;
     };
 
-    programs = {
-      docker.enable = false;
-    };
-
     # No GUI under WSL (these modules default to enabled).
     desktops.gnome = {
       enable = false;
