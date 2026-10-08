@@ -16,7 +16,6 @@ delib.module {
 
     home.file.".agents" = {
       source = ../../dotfiles/.agents;
-      recursive = true;
     };
 
     home.file.".codex" = {
