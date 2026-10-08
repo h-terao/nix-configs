@@ -9,7 +9,7 @@ delib.host {
     };
 
     programs = {
-      docker.enable = false;
+      docker.enable = true;
     };
 
     # No GUI under WSL (these modules default to enabled).
