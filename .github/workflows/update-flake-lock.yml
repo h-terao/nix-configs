@@ -46,11 +46,9 @@ jobs:
       needs.update.outputs.pr-number != '' &&
       (needs.update.outputs.pr-operation == 'created' ||
        needs.update.outputs.pr-operation == 'updated')
-    uses: ./.github/workflows/build-cache.yml
+    uses: ./.github/workflows/build.yml
     with:
       ref: ${{ needs.update.outputs.head-sha }}
-    secrets:
-      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   auto-merge:
     needs: [update, build]

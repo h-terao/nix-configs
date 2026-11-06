@@ -1,0 +1,53 @@
+name: Build NixOS
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit to build
+        required: true
+        type: string
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ inputs.ref || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build ${{ matrix.host }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        include:
+          - host: cuttlefish
+            runner: ubuntu-latest
+          - host: hippo
+            runner: ubuntu-latest
+          - host: quetzal
+            runner: ubuntu-latest
+          - host: zapus
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-substituters = https://yukimuro.dev/cache/h-terao https://nix-community.cachix.org https://cache.numtide.com
+            extra-trusted-public-keys = yukimuro-h-terao-1:fpHnGMInbfIw+GhjKGHPVtsUDTtS+Krt4Hg6fgwi+5c= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=
+
+      - name: Build NixOS configuration
+        env:
+          NIXOS_HOST: ${{ matrix.host }}
+        run: |
+          nix build --out-link result --print-build-logs --no-update-lock-file \
+            ".#nixosConfigurations.${NIXOS_HOST}.config.system.build.toplevel"
