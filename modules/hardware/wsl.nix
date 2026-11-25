@@ -22,6 +22,7 @@ delib.module {
         defaultUser = user.name;
         # This is what actually sets the hostname of the WSL instance.
         wslConf.network.hostname = host.name;
+        interop.register = true;
       };
 
       # Keep the NixOS-side hostname in sync (system generation name, /etc/hostname).
