@@ -9,7 +9,6 @@ delib.host {
     };
 
     hardware = {
-      graphics.intel.enable = true;
       tpm = {
         enable = true;
         luksDeviceName = "luks-71af17f5-434c-4b37-9dd4-3afcfe180655";
