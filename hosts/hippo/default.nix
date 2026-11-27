@@ -26,8 +26,6 @@ delib.host {
         nameservers = [ "192.168.0.1" ];
       };
     };
-
-    programs.lmstudio.enable = true;
   };
 
   home.home.sessionVariables = {
